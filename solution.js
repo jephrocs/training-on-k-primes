@@ -1,138 +1,3 @@
-// function countKprimes(k, start, nd) {
-//     function is_prime(num) {
-//         for (let i = 2; i <= Math.sqrt(num); i++) {
-//             if (num % i === 0) return false;
-//         }
-//         return true;
-//     }
-//     const result = [];
-//     for (let i = 2; i <= num; i++) {
-//         while (is_prime(i) && num % i === 0) {
-//             if (!result.includes(i)) result.push(i);
-//             num /= i;
-//         }
-//     }
-//     return result;
-// }
-
-
-// // k = prime factors 
-
-// console.log(countKprimes(100));
-
-// function findPrimeFactors(num) {
-
-//     var primeFactors = [];
-//     while (num % 2 === 0) {
-//         primeFactors.push(2);
-//         num = num / 2;
-//     }
-
-//     var sqrtNum = Math.sqrt(num);
-//     for (var i = 3; i <= sqrtNum; i++) {
-//         while (num % i === 0) {
-//             primeFactors.push(i);
-//             num = num / i;
-//         }
-//     }
-
-//     if (num > 2) {
-//         primeFactors.push(num);
-//     }
-//     return primeFactors;
-// }
-// function countKprimes(k, start, nd) {
-//     var kPrimes = []
-//     for (var j = start; j < nd; j++) {
-//         function findPrimeFactors(num) {
-
-//             var primeFactors = [];
-//             while (num % 2 === 0) {
-//                 primeFactors.push(2);
-//                 num = num / 2;
-//             }
-
-//             var sqrtNum = Math.sqrt(num);
-//             for (var i = 3; i <= sqrtNum; i++) {
-//                 while (num % i === 0) {
-//                     primeFactors.push(i);
-//                     num = num / i;
-//                 }
-//             }
-
-//             if (num > 2) {
-//                 primeFactors.push(num);
-//             }
-//             return primeFactors;
-//         }
-//     } return kPrimes
-// }
-
-// function findPrimeFactors(k, num, nd) {
-//     var numArr = []
-
-//     var fro = num.toString()
-//     var primeFactors = [];
-//     while (num % 2 === 0) {
-//         primeFactors.push(2);
-//         num = num / 2;
-//     }
-
-//     var sqrtNum = Math.sqrt(num);
-//     for (var i = 3; i <= sqrtNum; i++) {
-//         while (num % i === 0) {
-//             primeFactors.push(i);
-//             num = num / i;
-//         }
-//     }
-
-//     if (num > 2) {
-//         primeFactors.push(num);
-//     }
-//     if (k == primeFactors.length) {
-//         return [fro]
-//     } else return []
-// }
-
-// console.log(findPrimeFactors(2, 10)); // [2, 5]
-// console.log(findPrimeFactors(4, 32))
-
-
-// function findPrimeFactors(k, start, nd) {
-//     var numArr = []
-//     var kPrimes = []
-//     for (var m = start; m <= nd; m++) {
-//         numArr.push(m);
-//     }
-//     for (var r = 0; r < numArr.length; r++) {
-//         var primeFactors = [];
-//         while (numArr[r] % 2 === 0) {
-//             primeFactors.push(2);
-//             numArr[r] = numArr[r] / 2;
-//         }
-//         var sqrtNum = Math.sqrt(numArr[r]);
-
-//         for (var i = 3; i <= sqrtNum; i++) {
-//             while (numArr[r] % i === 0) {
-//                 primeFactors.push(i);
-//                 numArr[r] = numArr[r] / i;
-//             }
-//         }
-//         if (numArr[r] > 2) {
-//             primeFactors.push(numArr[r]);
-//         } console.log(primeFactors)
-//         if (k == primeFactors.length) {
-//             return kPrimes.push(numArr[r])
-//         } else return []
-//     }
-
-
-
-// }
-
-// console.log(findPrimeFactors(5, 500, 600));
-// console.log(findPrimeFactors(4, 32, 44))
-
 countKprimes = (k, start, nd) => {
     var numArr = []
     var kPrimes = []
@@ -160,16 +25,62 @@ countKprimes = (k, start, nd) => {
         if (primeFactors.length === k) {
             kPrimes.push(i + 1)
         }
-    } for (var z = 0; z < kPrimes.length; z++) {
-        if (start < kPrimes[z]) {
+    } for (var z = 0; z <= kPrimes.length; z++) {
+        if (start <= kPrimes[z]) {
             countKpri.push(kPrimes[z])
         }
     } return countKpri
 }
-console.log(countKprimes(5, 500, 600));
-console.log(countKprimes(3, 0, 100));
-console.log(countKprimes(5, 1000, 1100));
+// console.log(countKprimes(5, 500, 600));
+// console.log(countKprimes(3, 0, 100));
+// console.log(countKprimes(5, 1000, 1100));
 
-puzzles = (s) => {
-
+puzzle = (s) => {
+    var arr = []
+    var sol = 0
+    var sevenPrime = countKprimes(7, 0, s)
+    for (var i = 0; i < sevenPrime.length; i++) {
+        arr.push(countKprimes(3, 0, s - sevenPrime[i]))
+    } 
+    for (var j = 0; j < arr.length; j++) {
+        // console.log(arr[j].length)
+         sol = sol + arr[j].length
+        
+    }return sol
 }
+console.log(puzzle(300))
+console.log(puzzle(143))
+console.log(puzzle(138))
+// puzzle = (s) => {
+//     for (var i = 2; i <= s; i++) {
+//         if (Math.pow(i, 7) < s) {
+//             var sevenPrime = Math.pow(i, 7)
+//             s = s - sevenPrime
+//             console.log(sevenPrime, s)
+//             for (var j = 2; j <= s; j++) {
+//                 if (Math.pow(j, 3) <= s) {
+//                     // var threePrime = Math.pow(i, 3)
+//                     console.log(Math.pow(j, 3))
+
+//                     // s = s - threePrime
+//                     // console.log(s)
+//                 }
+//             }
+//         }
+//     }
+//     // console.log(Math.pow(2, 7));
+//     // console.log(Math.pow(2, 3));
+//     // console.log(Math.pow(2, 1));
+
+
+// }
+
+// console.log(puzzle(138))
+// console.log(puzzle(3000))
+// console.log(puzzle(143))
+
+// for (var i = 1; i <= 10; i++) {
+//     if (Math.pow(i, 2) < 60) {
+//         console.log(Math.pow(i, 2))
+//     }
+// }
