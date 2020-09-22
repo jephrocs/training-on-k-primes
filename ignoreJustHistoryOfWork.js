@@ -5,6 +5,33 @@
 //     for (var m = 1; m <= nd; m++) {
 //         numArr.push(m);
 //     }
+
+puzzle = (s) => {
+    var arr = []
+    var sol = 0
+    var sevenPrime = countKprimes(7, 0, s)
+    for (var i = 0; i < sevenPrime.length; i++) {
+        arr.push(countKprimes(3, 0, s - sevenPrime[i]))
+    }
+    for (var j = 0; j < arr.length; j++) {
+        sol = sol + arr[j].length
+
+    } return sol
+}
+
+puzzle = (s) => {
+    var arr = []
+    var sol = 0
+    var sevenPrime = countKprimes(7, 0, s)
+    for (var i = 0; i < sevenPrime.length; i++) {
+        arr.push(countKprimes(3, 0, s - sevenPrime[i]))
+    }
+    for (var j = 0; j < arr.length; j++) {
+        sol = sol + arr[j].length
+
+    } return sol
+}
+
 //     for (var i = 0; i <= nd; i++) {
 //         var primeFactors = [];
 //         var num = numArr[i]
